@@ -1,0 +1,32 @@
+name: Enviar Invitacion por Correo
+
+on:
+  # Esto te permite activar el envío manualmente con un botón desde la pestaña "Actions" de GitHub
+  workflow_dispatch:
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Enviar correo electrónico institucional
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Configuración del servidor SMTP (Si usas Gmail corporativo es smtp.gmail.com)
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          
+          # Credenciales protegidas mediante los Secrets de GitHub
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          
+          # Detalles del mensaje
+          subject: "CONFIRMACIÓN DE INSCRIPCIÓN - PEAMCO SAS"
+          to: comercial@peamco.com.co  # Cambia esto por el correo del laboratorio final si es necesario
+          from: PEAMCO SAS <comercial@peamco.com.co>
+          
+          # Cargar el diseño directamente desde tu archivo HTML
+          html_body: file://invitacion.html
