@@ -29,4 +29,4 @@ jobs:
           from: PEAMCO SAS <comercial@peamco.com.co>
           
           # Cargar el diseño directamente desde tu archivo HTML
-          html_body: file://invitacion.html
+          html_body: file://invitación.html
